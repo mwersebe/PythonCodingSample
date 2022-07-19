@@ -23,7 +23,7 @@ import seaborn as sns
 
 # Shell saves the day by parsing unimportant info from the gff file:
 
-os.system("grep -v '#' GCF_021234035.1_SC_F0-13Bv2_genomic.gff |cut -f 1,2,3,4,5 > fixed.gff")
+os.system("zcat GCF_021234035.1_SC_F0-13Bv2_genomic.gff.gz|grep -v '#'|cut -f 1,2,3,4,5 > fixed.gff")
 
 
 # import the parsed gff into pandas:
@@ -67,7 +67,7 @@ for feature in feature_types:
 
 # This just gets rid of the pesky unplaced contigs:
 
-os.system("grep -v '#' GCF_021234035.1_SC_F0-13Bv2_genomic.gff |cut -f 1,2,3,4,5|grep -v 'h1tg' > placed.gff")
+os.system("zcat GCF_021234035.1_SC_F0-13Bv2_genomic.gff.gz|grep -v '#'|cut -f 1,2,3,4,5|grep -v 'h1tg' > placed.gff")
 
 #Repeating steps above with new gff style file:
 placed_features = pandas.read_csv('placed.gff', sep = '\t', names = ['Chrom', 'Source', 'Feature', 'Start', 'Stop'])
